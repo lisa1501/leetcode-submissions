@@ -8,41 +8,33 @@
 
 class Solution:
     def findInMountainArray(self, target: int, mountainArr: 'MountainArray') -> int:
-        # time:O(logN), space:O(1)
         n = mountainArr.length()
-        lo = 0
-        hi = n - 1
-        while lo < hi:
-            mid = (lo + hi) // 2
 
-            if mountainArr.get(mid) < mountainArr.get(mid + 1):
-                lo = mid + 1
+        l = 0 
+        r = n -1
+        while l < r:
+            mid = (l+r) //2
+            if mountainArr.get(mid) < mountainArr.get(mid+1):
+                l = mid + 1
             else:
-                hi = mid 
-        peak = lo
+                r = mid 
+        peak = l
 
-        def binary_search(lo, hi, ascending):
-            while lo <= hi:
-                mid = (lo + hi) // 2
-                mid_val = mountainArr.get(mid)
-
-                if  mid_val == target:
-                    return mid
-
-                if ascending:
-                    if mid_val < target:
-                        lo = mid + 1
-                    else:
-                        hi = mid - 1
+        def binary_search(l, r, ascending):
+            while l<=r:
+                m = (l+r)//2
+                val = mountainArr.get(m)
+                if val == target:
+                    return m
+                if (val < target) == ascending:
+                    l = m+1
                 else:
-                    if mid_val < target:
-                        hi = mid - 1
-                    else:
-                        lo = mid + 1
+                    r = m-1
             return -1
-                
-        left_res = binary_search(0, peak, True)
-        if left_res != - 1:
-            return left_res
 
-        return binary_search(peak+1, n-1, False)      
+        left_res = binary_search(0, peak, True)
+        right_res = binary_search(peak, n-1, False)
+
+        if left_res == -1:
+            return right_res
+        return left_res
