@@ -34,7 +34,7 @@ class Solution:
                         lo = mid + 1
                     else:
                         hi = mid - 1
-                if not ascending:
+                else:
                     if mid_val < target:
                         hi = mid - 1
                     else:
