@@ -11,27 +11,25 @@
 #         self.right = right
 class Solution:
     def isSubPath(self, head: Optional[ListNode], root: Optional[TreeNode]) -> bool:
-
-        def match(tree_node, list_node):
-            if not list_node:
+        
+        def match(a, b):
+            if not b:
                 return True
-                
-            if not tree_node:
+            if not a:
                 return False
 
-            if tree_node.val != list_node.val:
+            if a.val != b.val:
                 return False
 
-            return match(tree_node.left, list_node.next) or match(tree_node.right, list_node.next)
-
-
+            return match(a.left, b.next) or match(a.right, b.next)
+        
         def dfs(node):
             if not node:
                 return False
+
             if match(node, head):
                 return True
+
             return dfs(node.left) or dfs(node.right)
-
         return dfs(root)
-
-       
+        
