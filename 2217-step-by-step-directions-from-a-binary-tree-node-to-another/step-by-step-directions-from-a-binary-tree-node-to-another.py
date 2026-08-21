@@ -6,17 +6,40 @@
 #         self.right = right
 class Solution:
     def getDirections(self, root: Optional[TreeNode], startValue: int, destValue: int) -> str:
-        # dfs, walk through on the tree, dfs return bool, if cur node val == target val, T else F, if not node F
-        # two lists, one list store the path from node to start value, one store the path from node to dest value, for left node list append "L", right node list append "R"
-        # LCA: Find common prefix, root = [5,1,2,3,null,6,4], startValue = 6, destValue = 4, 
-        # list1=[R,L] list2=[R,R]  node 2 is LCA of startValue = 6, destValue = 4, 
-        # get the idx Find common prefix,  how many "L" from LCA idx means how many Up
-        # return up + and join list2
-        # Time:  O(n) Space: O(h)
+        # from start, dest we can find lowest common ancessto LCA
+        # start from the lca, dfss traverse, left and riight
+        # path, is a lis, go to cur node left, if cur node is target val dfs => true
+        # 5 -> 1 path append "L" , 1->3 path append "L" =>["L","L"]
+        # 3 is target val, return T
+        # if 6 is right child of 1, 
+        # pop from path, ["L","L"] => ["L"] => we are node 1, 
+        # then go to right, path appen "R" ["L","R"]
+        # updtat "L" to U
+        # joinn path and return 
+        # time: O(n), space:O(h) n is num of node, blance h is heigh of the tree, worste O(n)
+        def lca(node):
+            if not node:
+                return None
+
+            if node.val == startValue or node.val == destValue:
+                return node
+
+            left = lca(node.left)
+            right = lca(node.right)
+
+            if left and right: # left=3, right=6 => return 5
+                return node
+
+            if left :
+                return left
+            return right
+
+        ancesstor = lca(root)
+
         def dfs(node, target, path):
             if not node:
                 return False
-
+            
             if node.val == target:
                 return True
 
@@ -34,25 +57,12 @@ class Solution:
 
         start_path = []
         dest_path = []
-        dfs(root, startValue, start_path)
-        dfs(root, destValue, dest_path)
-        
-        # Find common prefix
-        i = 0 
-        while i < len(start_path) and i < len(dest_path) and start_path[i] == dest_path[i]:
-            i += 1
 
-        # start -> LCA
-        up = "U" * (len(start_path) - i)
+        up = dfs(ancesstor, startValue, start_path)
+        down = dfs(ancesstor, destValue, dest_path)
 
-        # LCA -> destination
-        down = "".join(dest_path[i:])
-
-        return up + down
+        return "U" * (len(start_path)) + "".join(dest_path)
 
 
-
-
-        
 
         
