@@ -9,10 +9,11 @@ class Solution:
         def dfs(node, curSum):
             if not node:
                 return None
+
             curSum += node.val
-            
-            # Leaf
+
             if not node.left and not node.right:
+                
                 if curSum >= limit:
                     return node
                 else:
@@ -21,11 +22,16 @@ class Solution:
             node.left = dfs(node.left, curSum)
             node.right = dfs(node.right, curSum)
 
-            # Both subtrees were insufficient
-            if not node.left and not node.right: 
+            if not node.left and not node.right:
                 return None
-
             return node
 
+
+            
         return dfs(root, 0)
+
+    
+
+
+        
         
