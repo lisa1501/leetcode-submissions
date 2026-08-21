@@ -7,12 +7,14 @@
 class Solution:
     def pseudoPalindromicPaths (self, root: Optional[TreeNode]) -> int:
         ans = 0
-        def dfs(node, count):
-            nonlocal ans
+        count = defaultdict(int)
 
+        def dfs(node):
+            nonlocal ans
+            
             if not node:
                 return 
-                
+
             count[node.val] += 1
 
             if not node.left and not node.right:
@@ -24,10 +26,12 @@ class Solution:
                 if odd <= 1:
                     ans += 1
 
-            dfs(node.left, count)
-            dfs(node.right, count)
+
+            dfs(node.left)
+            dfs(node.right)
 
             count[node.val] -= 1
-
-        dfs(root, count = defaultdict(int))
+            
+        dfs(root)
         return ans
+        
