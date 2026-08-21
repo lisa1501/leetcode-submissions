@@ -1,69 +1,62 @@
 class Solution:
     def buildMatrix(self, k: int, rowConditions: List[List[int]], colConditions: List[List[int]]) -> List[List[int]]:
-        # Topological Sort for rowConditions, colConditions, similar to Course Schedule II
-        # if Topological Sort for rowConditions is not empty list, loop thru list, enumerate, map num -> idx(row), return []
-        # if Topological Sort for colConditions is not empty list, loop thru list, enumerate, map num -> idx(col), resutn []
-        # build matrix,with k zero, update matrix[r][c] to num, map num -> idx(row), map num -> idx(col),
-        # Time:  O(k*k + R + C) Space: O(k + R + C), R:num of rowConditions, C:num of colConditions
-        def topo_sort(conditions):
 
+        def top_sort(conditions):
             graph = defaultdict(list)
-            indegree = [0] * (k + 1)
+            indegree = [0] * (k+1)
 
-            for u, v in conditions:
-                graph[u].append(v)
-                indegree[v] += 1
+            for pre, nxt in conditions:
+                graph[pre].append(nxt)
+                indegree[nxt] += 1
+            
+            q = deque([])
 
-            q = deque()
-
-            for node in range(1, k + 1):
-                if indegree[node] == 0:
-                    q.append(node)
+            for i in range(1,k+1):
+                if indegree[i] == 0:
+                    q.append(i)
 
             order = []
 
             while q:
+                for _ in range(len(q)):
+                    pre = q.popleft()
+                    order.append(pre)
 
-                node = q.popleft()
-                order.append(node)
+                    for nxt in graph[pre]:
+                        indegree[nxt] -= 1
 
-                for nei in graph[node]:
+                        if indegree[nxt] == 0:
+                            q.append(nxt)
 
-                    indegree[nei] -= 1
-
-                    if indegree[nei] == 0:
-                        q.append(nei)
-
-            # Cycle
             if len(order) != k:
                 return []
             return order
 
-        # topological sort rows, cols
-        row_order = topo_sort(rowConditions) #O(R)
-        col_order = topo_sort(colConditions) #O(C)
+        top_sort_rowConditions = top_sort(rowConditions)
+        top_sort_colConditions= top_sort(colConditions)
 
-        # early return 
-        if not row_order:
-            return []
-        if not col_order:
+        if not top_sort_rowConditions:
             return []
 
-        # map number -> row
-        row_pos = {}
-        for r, num in enumerate(row_order):
+        if not top_sort_colConditions:
+            return []
+
+        row_pos ={}
+        for r, num in enumerate(top_sort_rowConditions):
             row_pos[num] = r
-        # map number -> column
-        col_pos = {}
-        for c, num in enumerate(col_order):
+
+        col_pos ={}
+        for c, num in enumerate(top_sort_colConditions):
             col_pos[num] = c
 
-        # build matrix
-        matrix = [[0] * k for _ in range(k)] #O(k*k)
+    
+        matrix = [[0] * k for _ in range(k)] 
         for num in range(1, k + 1):
             r = row_pos[num]
             c = col_pos[num]
             matrix[r][c] = num
 
         return matrix
+
+
         
