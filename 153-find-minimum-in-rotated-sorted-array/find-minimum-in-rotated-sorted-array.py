@@ -5,7 +5,7 @@ class Solution:
         while lo < hi:
             mid = (lo + hi) // 2
 
-            if nums[mid] < nums[hi]:
+            if nums[mid] <= nums[hi]:
                 hi = mid
             else:
                 lo = mid + 1
