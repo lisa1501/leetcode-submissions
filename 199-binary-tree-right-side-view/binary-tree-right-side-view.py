@@ -6,12 +6,12 @@
 #         self.right = right
 class Solution:
     def rightSideView(self, root: Optional[TreeNode]) -> List[int]:
-        # time:O(n), space:O(n)
-        res = [] 
+        res = []
+
         def dfs(node, depth):
             if not node:
                 return 
-            
+
             if len(res) == depth:
                 res.append(node.val)
 
