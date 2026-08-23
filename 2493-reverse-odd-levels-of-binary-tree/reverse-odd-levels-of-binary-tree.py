@@ -6,10 +6,9 @@
 #         self.right = right
 class Solution:
     def reverseOddLevels(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
-        # time:O(n), space:O(n)
-        if not root: 
+        if not root:
             return []
-        
+
         q = deque([root])
         depth = 0
         while q:
@@ -24,14 +23,14 @@ class Solution:
                     if node.right:
                         q.append(node.right)
 
-            if depth % 2 == 1: #odd level
-                i = 0  # two pointers
-                j = len(level)-1
+            
+            if depth % 2 == 1:
+                i = 0
+                j = len(level) -1
                 while i < j:
-                    level[i].val, level[j].val = level[j].val, level[i].val #swap
-                    i+=1 # move two pointers
-                    j-=1
+                    level[i].val, level[j].val = level[j].val, level[i].val
+                    i += 1
+                    j -= 1
             depth += 1
-        
         return root
         
