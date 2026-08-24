@@ -6,19 +6,27 @@
 #         self.right = right
 class Solution:
     def widthOfBinaryTree(self, root: Optional[TreeNode]) -> int:
+        if not root:
+            return 0
+
+        q = deque([(root, 1)])
+
         ans = 0
-        q = deque([(root,1)])
 
         while q:
-            cur_width = q[-1][1] - q[0][1] + 1
-            ans = max(ans, cur_width)
-            
-            for i in range(len(q)):
-                node, idx = q.popleft()
+            width = q[-1][1] - q[0][1] + 1
+            ans = max(ans, width)
+
+            for _ in range(len(q)):
+                node, width = q.popleft()
+
                 if node:
                     if node.left:
-                        q.append((node.left, idx*2))
-
+                        q.append((node.left, 2*width))
                     if node.right:
-                        q.append((node.right, idx*2+1))
+                        q.append((node.right, 2*width + 1))
+
         return ans
+
+
+        
