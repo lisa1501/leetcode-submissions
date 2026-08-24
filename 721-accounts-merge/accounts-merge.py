@@ -1,53 +1,50 @@
-# DSU, time: O((n*m)log(n*m)) space:O(n*m)
-
 class DSU:
     def __init__(self, n):
-        self.Parent = list(range(n + 1))
-        self.Size = [1] * (n + 1)
+        self.parent = [i for i in range(n+1)]
+        self.size = [1] * (n+1)
 
     def find(self, node):
-        # every node is root of itself, 
-        if self.Parent[node] != node:
-            self.Parent[node] = self.find(self.Parent[node])
-        return self.Parent[node]
+        if self.parent[node] != node:
+            self.parent[node] = self.find(self.parent[node])
+        return self.parent[node]
 
     def union(self, u, v):
         pu = self.find(u)
         pv = self.find(v)
-        # we are unioning child and parent, if child and parent has same parent, this is impossible, this means there is a cycle in grandparent, parent, child, so this is not tree,
+
         if pu == pv:
             return False
 
-        if self.Size[pu] < self.Size[pv]:
+        if self.size[pu] < self.size[pv]:
             pu, pv = pv, pu
-        self.Size[pu] += self.Size[pv]
-        self.Parent[pv] = pu
-        return True
 
+        self.size[pu] += self.size[pv]
+        self.parent[pv] = pu
+        return True
 
 class Solution:
     def accountsMerge(self, accounts: List[List[str]]) -> List[List[str]]:
-        dsu = DSU(len(accounts))
-        email_to_acc = {} # email to account idx
+        n = len(accounts)
+        dsu = DSU(n)
 
-        for i, a in enumerate(accounts):
-            for e in a[1:]:
-                if e in email_to_acc:
-                    dsu.union(i, email_to_acc[e])
+        email_to_idx = defaultdict(int)
+        for i, account in enumerate(accounts):
+            for email in account[1:]:
+                if email not in email_to_idx:
+                    email_to_idx[email] = i
                 else:
-                    email_to_acc[e] = i
+                    dsu.union(i, email_to_idx[email])
 
-        email_group = defaultdict(list)
+        leader_to_emails = defaultdict(list)
 
-        for e, i in email_to_acc.items():
-            leader = dsu.find(i)
-            email_group[leader].append(e)
+        for email,idx in email_to_idx.items():
+            leader_idx = dsu.find(idx)
+            leader_to_emails[leader_idx].append(email)
 
         res = []
-        for i, emails in email_group.items():
-            name = accounts[i][0]
-            res.append([name] + sorted(email_group[i]))
+        for leader_idx, eamils in leader_to_emails.items():
+            name = accounts[leader_idx][0]
+            res.append([name] + sorted(leader_to_emails[leader_idx]))
 
         return res
-
         
