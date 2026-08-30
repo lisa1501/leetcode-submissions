@@ -13,12 +13,11 @@ class Solution:
             left = dfs(node.left)
             right = dfs(node.right)
 
-            if not left:
-                return 1+ right
-            
-            if not right:
-                return 1 + left
+            if left == 0:
+                return right + 1
+
+            if right == 0:
+                return left + 1
 
             return 1 + min(left, right)
         return dfs(root)
-        
