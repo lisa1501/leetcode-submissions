@@ -5,7 +5,7 @@ class Solution:
         dirs = [(0,1), (0,-1), (1,0), (-1,0)]
         visited = set()
         ans = 0
-        islandId_to_size = {}
+        islandId_to_size = defaultdict(int)
         islandId = 2
 
         def dfs(r, c, num):
@@ -48,7 +48,7 @@ class Solution:
 
                             if nei_id not in seen:
                                 seen.add(nei_id)
-                                total += islandId_to_size.get(nei_id,0)
+                                total += islandId_to_size[nei_id]
 
                     ans = max(ans, total)
 
