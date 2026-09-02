@@ -17,7 +17,7 @@ class Solution:
 
             path_sum += node.val
 
-            ans += path_sums[path_sum -  targetSum]
+            ans += path_sums[path_sum - targetSum]
 
             path_sums[path_sum] += 1
 
