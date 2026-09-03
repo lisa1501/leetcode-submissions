@@ -23,22 +23,24 @@ class Solution:
             5: [2, 4]
         }
         while q:
-            state, steps = q.popleft()
-            if state == target:
-                return steps
+            for _ in range(len(q)):
+                state, steps = q.popleft()
+                
+                if state == target:
+                    return steps
 
-            zero_idx = state.index("0")
+                zero_idx = state.index("0")
 
-            for nei in neighbors[zero_idx]:
-                state_list = list(state)
+                for nei in neighbors[zero_idx]:
+                    state_list = list(state)
 
-                state_list[zero_idx], state_list[nei] = state_list[nei], state_list[zero_idx]
+                    state_list[zero_idx], state_list[nei] = state_list[nei], state_list[zero_idx]
 
-                new_state = "".join(state_list)
+                    new_state = "".join(state_list)
 
-                if new_state not in visited:
-                    visited.add(new_state)
-                    q.append((new_state, steps+1))
+                    if new_state not in visited:
+                        visited.add(new_state)
+                        q.append((new_state, steps+1))
 
         return -1
 
