@@ -6,32 +6,25 @@
 #         self.right = right
 class Solution:
     def sufficientSubset(self, root: Optional[TreeNode], limit: int) -> Optional[TreeNode]:
-        def dfs(node, curSum):
+        def dfs(node, path_sum):
             if not node:
-                return None
+                return 
 
-            curSum += node.val
+
+            path_sum += node.val
 
             if not node.left and not node.right:
-                
-                if curSum >= limit:
+                if path_sum >= limit:
                     return node
                 else:
                     return None
 
-            node.left = dfs(node.left, curSum)
-            node.right = dfs(node.right, curSum)
+            node.left = dfs(node.left, path_sum)
+            node.right = dfs(node.right, path_sum)
 
             if not node.left and not node.right:
                 return None
-            return node
-
-
-            
+            else:
+                return node
+                
         return dfs(root, 0)
-
-    
-
-
-        
-        
