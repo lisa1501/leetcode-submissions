@@ -6,14 +6,12 @@ class Solution:
             i = 0
             while i < len(word):
                 if word[i] != "#":
-                    res.append(word[i])
-                    i += 1
+                    res.append(word[i])      
                 else:
                     if res != []:
                         res.pop()
-                    i += 1
+                i += 1
             return "".join(res)
-
 
         return helper(s) == helper(t)
 
