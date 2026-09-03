@@ -9,7 +9,9 @@ class Solution:
             prefix_sum += num
             remain = prefix_sum % k
 
-            res += seen.get(remain, 0)
+            if remain in seen:
+                res += seen[remain]
+                
             seen[remain] = seen.get(remain, 0) + 1
        
         return res
