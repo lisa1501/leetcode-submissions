@@ -7,11 +7,12 @@
 class Solution:
     def smallestFromLeaf(self, root: Optional[TreeNode]) -> str:
         ans = "~"
-        path = []
-        def dfs(node):
+        
+        def dfs(node, path):
             nonlocal ans
             if not node:
                 return 
+
             path.append(chr(node.val + ord('a')))
 
             if not node.left and not node.right:
@@ -19,12 +20,12 @@ class Solution:
 
                 ans = min(ans, str_path)
 
-            dfs(node.left)
-            dfs(node.right)
+            dfs(node.left, path)
+            dfs(node.right, path)
 
             path.pop()
 
-        dfs(root)
+        dfs(root, [])
         return ans
 
         
