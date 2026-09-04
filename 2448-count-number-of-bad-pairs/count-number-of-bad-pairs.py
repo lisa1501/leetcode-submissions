@@ -1,15 +1,16 @@
 class Solution:
     def countBadPairs(self, nums: List[int]) -> int:
-        # Time:  O(n) Space: O(n)
+        # j - i != nums[j] - nums[i]
+        # i - nums[i] != j - nums[j]
         n = len(nums)
-        total_pairs = n * (n - 1) // 2
-        freq = {}
-        bad_pairs = 0
-
+        total = n*(n-1)//2
+        seen = {}
+        good_pairs = 0
         for i, num in enumerate(nums):
             key = i - num
-            bad_pairs += freq.get(key, 0)
-            freq[key] = freq.get(key, 0) + 1
+            good_pairs += seen.get(key, 0) 
+            seen[key] = seen.get(key, 0) + 1
+        return total - good_pairs
+            
 
-        return total_pairs - bad_pairs
         
