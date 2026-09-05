@@ -15,13 +15,12 @@ class Solution:
             level = []
             for _ in range(len(q)):
                 node = q.popleft()
-                if node:
-                    level.append(node.val)
+                level.append(node.val)
 
-                    if node.left:
-                        q.append(node.left)
-                    if node.right:
-                        q.append(node.right)
+                if node.left:
+                    q.append(node.left)
+                if node.right:
+                    q.append(node.right)
 
             res.append(level)
 
