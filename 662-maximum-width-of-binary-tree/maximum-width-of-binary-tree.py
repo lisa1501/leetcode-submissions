@@ -20,11 +20,10 @@ class Solution:
             for _ in range(len(q)):
                 node, width = q.popleft()
 
-                if node:
-                    if node.left:
-                        q.append((node.left, 2*width))
-                    if node.right:
-                        q.append((node.right, 2*width + 1))
+                if node.left:
+                    q.append((node.left, 2 * width))
+                if node.right:
+                    q.append((node.right, 2 * width + 1))
 
         return ans
 
