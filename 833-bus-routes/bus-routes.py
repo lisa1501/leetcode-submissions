@@ -3,26 +3,26 @@ class Solution:
         if source == target:
             return 0
 
-        stop_to_route = defaultdict(list)
+        stop_to_buses = defaultdict(list)
 
-        for route_id, route in enumerate(routes):
+        for bus_id, route in enumerate(routes):
             for stop in route:
-                stop_to_route[stop].append(route_id)
+                stop_to_buses[stop].append(bus_id)
 
         visited_stops = set()
         visited_stops.add(source)
-        visited_routes = set()
+        visited_buses = set()
         q = deque([(source, 0)])
 
         while q:
             stop, bus = q.popleft()
 
-            for route_id in stop_to_route[stop]:
-                if route_id in visited_routes:
+            for bus_id in stop_to_buses[stop]:
+                if bus_id in visited_buses:
                     continue
-                visited_routes.add(route_id)
+                visited_buses.add(bus_id)
 
-                for nxt_stop in routes[route_id]:
+                for nxt_stop in routes[bus_id]:
                     if nxt_stop == target:
                         return bus + 1
 
