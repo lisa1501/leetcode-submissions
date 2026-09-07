@@ -5,51 +5,60 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-    def minSwaps(self, arr: list) -> int:
-        # Temporary array to store elements in sorted order
-        temp = sorted(arr)
-        
-        # Hashing elements with their correct positions
-        pos = {}
-        for i in range(len(arr)):
-            pos[arr[i]] = i
-        
-        swaps = 0
-        for i in range(len(arr)):
-            if temp[i] != arr[i]:
-                
-                ind = pos[temp[i]]
-                arr[i], arr[ind] = arr[ind], arr[i]
 
-                pos[arr[i]] = i
-                pos[arr[ind]] = ind
+    def minSwap(self, arr: list) -> int:
+        swaps = 0
+        sorted_arr = sorted(arr)
+        num_to_idx = {}
+        for i in range(len(arr)):
+            num = arr[i]
+            num_to_idx[num] = i
+
+        for i in range(len(arr)):
+            if arr[i] != sorted_arr[i]:
+                idx = num_to_idx[sorted_arr[i]]
+                arr[i], arr[idx] = arr[idx], arr[i]
+
+                num_to_idx[arr[i]] = i
+                num_to_idx[arr[idx]] = idx
 
                 swaps += 1
-        return swaps
 
+        return swaps
     def minimumOperations(self, root: Optional[TreeNode]) -> int:
-        q = deque([root])
+        # [1,4,3,7,6,8,5,null,null,null,null,9,null,10]
+        # bfs, [[1],[4,3],[7,6,8,5], [9,10]]
+        # helper func, swap items, make nested list a sorted list, how many time swaping is => the minimum number of operations we needed 
+        # [4,3] => sorted ,[3,4] store, num to idx [4,3] => {4:0, 3:1}, 
+        # time : helper = o(nlogn) + O(n) = O(nlogn) bfs: O(n), total =O(nlogn)
+        # space :O(n)
 
         ans = 0
+        q = deque([root])
 
         while q:
-
             level = []
-
             for _ in range(len(q)):
-                
                 node = q.popleft()
-                if node:
-                    level.append(node.val)
+                level.append(node.val)
 
-                    if node.left:
-                        q.append(node.left)
+                if node.left:
+                    q.append(node.left)
 
-                    if node.right:
-                        q.append(node.right)
+                if node.right:
+                    q.append(node.right)
 
-            ans += self.minSwaps(level)
+            ans += self.minSwap(level)      
 
-            print(level)
         return ans
+
         
+
+        
+
+            
+
+
+
+            
+
