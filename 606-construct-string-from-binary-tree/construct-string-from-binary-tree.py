@@ -6,7 +6,6 @@
 #         self.right = right
 class Solution:
     def tree2str(self, root: Optional[TreeNode]) -> str:
-
         def dfs(node):
             if not node:
                 return ""
@@ -14,16 +13,18 @@ class Solution:
             left = dfs(node.left)
             right = dfs(node.right)
 
-            if not node.left and not node.right:
+            if not left and not right:
                 return f"{node.val}"
 
-            if node.left and node.right:
+            if left and right:
                 return f"{node.val}({left})({right})"
 
-            if node.left and not node.right:
+            if not left and right:
+                return f"{node.val}()({right})"
+
+            if left and not right:
                 return f"{node.val}({left})"
 
-            if not node.left and node.right:
-                return f"{node.val}()({right})"
-            
         return dfs(root)
+
+        
