@@ -19,12 +19,12 @@ class Solution:
 
         get_heigh(root)
 
-        hm = {}
+        node_to_restHeigh = {}
         def dfs(node, depth, restHeigh):
             if not node:
                 return 0
 
-            hm[node.val] = restHeigh
+            node_to_restHeigh[node.val] = restHeigh
 
             rightHeigh = depth
             if node.right:
@@ -42,7 +42,7 @@ class Solution:
         
         res = []
         for q in queries:
-            res.append(hm[q])
+            res.append(node_to_restHeigh[q])
         return res
 
 
