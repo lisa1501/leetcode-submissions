@@ -7,6 +7,7 @@
 class Solution:
     def isBalanced(self, root: Optional[TreeNode]) -> bool:
         isBalanced = True
+
         def dfs(node):
             nonlocal isBalanced
 
@@ -16,10 +17,11 @@ class Solution:
             left = dfs(node.left)
             right = dfs(node.right)
 
-            if abs(left - right) > 1:
+            if abs(left - right) >= 2:
                 isBalanced = False
 
             return 1 + max(left, right)
 
         dfs(root)
+
         return isBalanced
