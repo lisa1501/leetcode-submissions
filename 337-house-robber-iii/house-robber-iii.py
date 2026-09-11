@@ -14,7 +14,6 @@ class Solution:
             robe_right_node, skip_right_node = dfs(node.right)
 
             robe_node = node.val + skip_left_node + skip_right_node
-
             skip_node = max(robe_left_node, skip_left_node) + max(robe_right_node, skip_right_node)
 
             return (robe_node, skip_node)
