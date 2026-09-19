@@ -6,7 +6,7 @@
 #         self.right = right
 class Solution:
     def flipEquiv(self, root1: Optional[TreeNode], root2: Optional[TreeNode]) -> bool:
-        def dfs(a, b):
+        def isSameTrees(a, b):
             if not a and not b:
                 return True
 
@@ -16,9 +16,9 @@ class Solution:
             if a.val != b.val:
                 return False
 
-            flip = dfs(a.left, b.right) and dfs(a.right, b.left)
-            no_flip = dfs(a.left, b.left) and dfs(a.right, b.right)
+            flip = isSameTrees(a.left, b.right) and isSameTrees(a.right, b.left)
+            no_flip = isSameTrees(a.left, b.left) and isSameTrees(a.right, b.right)
             return flip or no_flip
             
-        return dfs(root1, root2)
+        return isSameTrees(root1, root2)
         
