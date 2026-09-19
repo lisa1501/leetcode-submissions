@@ -10,15 +10,15 @@ class Solution:
         def dfs(node, arr):
             if not node:
                 return 
+
             if not node.left and not node.right:
                 arr.append(node.val)
-            
-            dfs(node.left, arr)
-            dfs(node.right, arr)
 
-        a = []
-        b = []
-        dfs(root1, a)
-        dfs(root2, b)
-        return a == b
-        
+            left = dfs(node.left, arr)
+            right = dfs(node.right, arr)
+                
+        arr1 = []
+        arr2 = []
+        dfs(root1, arr1)
+        dfs(root2, arr2)
+        return arr1 == arr2
