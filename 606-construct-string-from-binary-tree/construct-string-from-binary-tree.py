@@ -26,5 +26,4 @@ class Solution:
                 return f"{node.val}({left})"
 
         return dfs(root)
-
         
