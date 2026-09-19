@@ -7,7 +7,7 @@
 class Solution:
     def isSubtree(self, root: Optional[TreeNode], subRoot: Optional[TreeNode]) -> bool:
 
-        def isSameTreee(a,b):
+        def isSameTrees(a,b):
             if not a and not b:
                 return True
 
@@ -17,13 +17,13 @@ class Solution:
             if a.val != b.val:
                 return False
 
-            return isSameTreee(a.left,b.left) and isSameTreee(a.right,b.right)
+            return isSameTrees(a.left, b.left) and isSameTrees(a.right, b.right)
 
         def dfs(node):
             if not node:
                 return False
             
-            if isSameTreee(node, subRoot):
+            if isSameTrees(node, subRoot):
                 return True
             
             return dfs(node.left) or dfs(node.right)
