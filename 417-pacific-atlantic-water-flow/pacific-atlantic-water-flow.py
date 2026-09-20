@@ -11,10 +11,11 @@ class Solution:
             for dr, dc in dirs:
                 nr = r + dr
                 nc = c + dc
-                if not (0<=nr<rows and 0<=nc<cols):
+
+                if not (0 <= nr <rows and 0 <= nc < cols):
                     continue
 
-                if (nr,nc) in visited:
+                if (nr, nc) in visited:
                     continue
 
                 if heights[nr][nc] < heights[r][c]:
@@ -37,7 +38,7 @@ class Solution:
         res = []
         for r in range(rows):
             for c in range(cols):
-                if (r,c) in pacific and (r,c) in atlantic:
+                if (r, c) in pacific and (r, c) in atlantic:
                     res.append([r,c])
         return res
 
