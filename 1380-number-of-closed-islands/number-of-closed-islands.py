@@ -11,7 +11,9 @@ class Solution:
             grid[r][c] = 1
 
             for dr, dc in dirs:
-                dfs(dr+r, dc+c)
+                nr = r + dr
+                nc = c + dc
+                dfs(nr, nc)
 
 
         for r in range(rows):
