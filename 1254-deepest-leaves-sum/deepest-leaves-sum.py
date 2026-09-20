@@ -7,26 +7,22 @@
 class Solution:
     def deepestLeavesSum(self, root: Optional[TreeNode]) -> int:
         ans = None
-        max_depth = -1
+        max_depth = float('-inf')
 
         def dfs(node, depth):
             nonlocal ans, max_depth
-            if not node:
-                return 
 
-            if depth > max_depth:
+            if not node:
+                return 0
+
+            if max_depth < depth:
                 max_depth = depth
                 ans = node.val
-
-            elif depth >= max_depth:
-                max_depth = depth
+            elif max_depth == depth:
                 ans += node.val
 
-            left = dfs(node.left, depth + 1)
-            right = dfs(node.right, depth + 1)
+            left = dfs(node.left, depth+1)
+            right = dfs(node.right, depth+1)
 
         dfs(root, 0)
         return ans
-
-
-        
