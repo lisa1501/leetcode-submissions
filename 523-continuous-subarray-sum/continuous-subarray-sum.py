@@ -1,7 +1,7 @@
 class Solution:
     def checkSubarraySum(self, nums: List[int], k: int) -> bool:
 
-        seen = {0:-1}
+        seen = {0 : -1}
         prefix_sum = 0
 
         for i in range(len(nums)):
@@ -13,8 +13,4 @@ class Solution:
                     return True
             else:
                 seen[reminder] = i
-        return False
-
-        
-        
-        
+        return False   
