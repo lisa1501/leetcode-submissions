@@ -1,27 +1,27 @@
 class NumMatrix:
 
     def __init__(self, matrix: List[List[int]]):
-        ROWS, COLS = len(matrix), len(matrix[0])
-        self.prefix_matrix = [[0] * (COLS + 1) for _ in range(ROWS + 1)]
+        rows = len(matrix)
+        cols =len(matrix[0])
 
-        for r in range(ROWS):
+        self.prefix_matrix = [[0] * (cols + 1) for _ in range(rows + 1)]
+
+        for r in range(rows):
             prefix = 0
-            for c in range(COLS):
+            for c in range(cols):
                 prefix += matrix[r][c]
                 above = self.prefix_matrix[r][c + 1]
                 self.prefix_matrix [r + 1][c + 1] = prefix + above
 
-        # print(self.prefix_matrix)
-
 
     def sumRegion(self, row1: int, col1: int, row2: int, col2: int) -> int:
-        row1, col1, row2, col2 = row1 + 1, col1 + 1, row2 + 1, col2 + 1
-        bottomRight = self.prefix_matrix[row2][col2]
-        above = self.prefix_matrix [row1 - 1][col2]
-        left = self.prefix_matrix [row2][col1 - 1]
-        topLeft = self.prefix_matrix [row1 - 1][col1 - 1]
-        print(self.prefix_matrix[row2][col2],self.prefix_matrix [row1 - 1][col2], self.prefix_matrix [row2][col1 - 1],self.prefix_matrix [row1 - 1][col1 - 1])
-        return bottomRight - above - left + topLeft
+
+        bottomRight = self.prefix_matrix[row2+1][col2+1]
+        topRight = self.prefix_matrix [row1][col2+1]
+        bottomleft = self.prefix_matrix [row2+1][col1]
+        topLeft = self.prefix_matrix [row1][col1]
+
+        return bottomRight - topRight - bottomleft + topLeft
 
     
         
