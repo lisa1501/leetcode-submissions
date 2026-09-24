@@ -1,6 +1,7 @@
 class Solution:
     def ladderLength(self, beginWord: str, endWord: str, wordList: List[str]) -> int:
         wordset = set(wordList)
+
         if endWord not in wordset:
             return 0
 
@@ -11,6 +12,7 @@ class Solution:
         while q:
             for _ in range(len(q)):
                 state, steps = q.popleft()
+                
                 if state == endWord:
                     return steps
 
