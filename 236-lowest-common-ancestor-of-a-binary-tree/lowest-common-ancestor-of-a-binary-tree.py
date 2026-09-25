@@ -11,8 +11,8 @@ class Solution:
         def lca(node):
             if not node:
                 return None
-            # p,q are node, is not val
-            if node == p or node == q:
+
+            if node.val == p.val or node.val == q.val:
                 return node
 
             left = lca(node.left)
@@ -27,4 +27,3 @@ class Solution:
             return right
 
         return lca(root)
-        
