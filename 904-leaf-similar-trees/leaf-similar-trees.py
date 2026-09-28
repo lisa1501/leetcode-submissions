@@ -11,12 +11,12 @@ class Solution:
             if not node:
                 return 
 
+            dfs(node.left, arr)
+            dfs(node.right, arr)
+
             if not node.left and not node.right:
                 arr.append(node.val)
-
-            left = dfs(node.left, arr)
-            right = dfs(node.right, arr)
-                
+      
         arr1 = []
         arr2 = []
         dfs(root1, arr1)
