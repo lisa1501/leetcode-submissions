@@ -22,11 +22,11 @@ class Solution:
         for c in range(cols):
             for r in [0, rows-1]:
                 dfs(r, c)
+                
         res = 0
         for r in range(rows):
             for c in range(cols):
                 if grid[r][c] == 1:
                     res += 1
 
-        return res
-        
+        return res  
