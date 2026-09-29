@@ -34,8 +34,3 @@ class Solution:
 
                 if board[r][c] == "Y":
                     board[r][c] = "O"
-
-        return board
-
-
-        
