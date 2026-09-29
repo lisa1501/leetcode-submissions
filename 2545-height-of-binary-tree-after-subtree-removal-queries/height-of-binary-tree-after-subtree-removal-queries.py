@@ -28,13 +28,13 @@ class Solution:
 
             rightHeigh = depth
             if node.right:
-                rightHeigh = depth + heigh[node.right.val]
+                rightHeigh += heigh[node.right.val]
 
             dfs(node.left, depth+1, max(restHeigh, rightHeigh))
 
             leftHeigh = depth
             if node.left:
-                leftHeigh = depth + heigh[node.left.val]
+                leftHeigh += heigh[node.left.val]
 
             dfs(node.right, depth+1, max(restHeigh, leftHeigh))
 
