@@ -28,8 +28,8 @@ class Solution:
         for r in range(rows):
             for c in range(cols):
                 if grid[r][c] == 0:
-                    res += 1
                     dfs(r,c)
+                    res += 1
         return res
 
                 
