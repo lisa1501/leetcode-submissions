@@ -10,7 +10,6 @@ class Solution:
             if not node:
                 return 
 
-
             path_sum += node.val
 
             if not node.left and not node.right:
@@ -26,5 +25,5 @@ class Solution:
                 return None
             else:
                 return node
-                
+
         return dfs(root, 0)
