@@ -11,8 +11,8 @@ class Solution:
 
         if len(q) == 0 or len(q) == n*n:
             return -1
-
-        distance = -1
+    
+        distance = 0
 
         while q:
             distance += 1
@@ -27,4 +27,4 @@ class Solution:
                         grid[nr][nc] = 1
                         q.append((nr, nc))  
             
-        return distance
+        return distance - 1
