@@ -6,21 +6,23 @@
 #         self.right = right
 class Solution:
     def isCompleteTree(self, root: Optional[TreeNode]) -> bool:
+        q = deque([root])
         seen_null = False
 
-        q = deque([root])
-
         while q:
-            node = q.popleft()
+            for _ in range(len(q)):
+                node = q.popleft()
 
-            if node:
-                if seen_null:
-                    return False
+                if node:
+                    if seen_null == True:
+                        return False
 
-                q.append(node.left)
-                q.append(node.right)
-            else:
-                seen_null = True
-       
+                    q.append(node.left)
+                    q.append(node.right)
+                    
+                else:
+                    seen_null = True
+                
         return True
+
         
