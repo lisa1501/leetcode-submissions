@@ -7,15 +7,15 @@ class Solution:
 
         used = set()
 
-        def dfs(source, used):
+        def dfs(source):
 
             used.add(source)
 
             for nei in graph[source]:
                 if nei not in used:
-                    dfs(nei, used)
+                    dfs(nei)
 
-        dfs(0, used)
+        dfs(0)
            
         return len(used) == len(rooms)
 
