@@ -9,20 +9,13 @@ class Solution:
             graph[u].append(v)
             graph[v].append(u)
 
-        def dfs(node):
+        def dfs(node, visit):
             if node == destination:
                 return True
             visit.add(node)
             for nei in graph[node]:
-                if nei not in visit and dfs(nei):
+                if nei not in visit and dfs(nei, visit):
                     return True
             return False
                 
-
-        for key in graph:
-            if key == source and key not in visit:
-                if dfs(key):
-                    return True
-        return False
-        
-        
+        return dfs(source, visit)
