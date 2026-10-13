@@ -8,8 +8,8 @@ class Solution:
         used = set()
 
         def dfs(source, used):
-            if source not in used:
-                used.add(source)
+
+            used.add(source)
 
             for nei in graph[source]:
                 if nei not in used:
