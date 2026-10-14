@@ -36,7 +36,6 @@ class Solution:
                     dsu.union(i, email_to_idx[email])
 
         leader_to_emails = defaultdict(list)
-
         for email,idx in email_to_idx.items():
             leader_idx = dsu.find(idx)
             leader_to_emails[leader_idx].append(email)
