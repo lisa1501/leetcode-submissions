@@ -78,3 +78,4 @@ class Solution:
             dsu.find(i)
             for i in range(4 * n * n)
         })
+        
