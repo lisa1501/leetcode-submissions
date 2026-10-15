@@ -12,7 +12,6 @@ class Solution:
                 left += 1
 
             if right - left + 1 == k:
-                window_avg = window_sum / k
-                ans = max(ans, window_avg)
+                ans = max(ans, window_sum)
 
-        return ans
+        return ans / k
