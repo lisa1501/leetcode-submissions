@@ -6,17 +6,6 @@
 #         self.right = right
 class Solution:
     def getDirections(self, root: Optional[TreeNode], startValue: int, destValue: int) -> str:
-        # from start, dest we can find lowest common ancessto LCA
-        # start from the lca, dfss traverse, left and riight
-        # path, is a lis, go to cur node left, if cur node is target val dfs => true
-        # 5 -> 1 path append "L" , 1->3 path append "L" =>["L","L"]
-        # 3 is target val, return T
-        # if 6 is right child of 1, 
-        # pop from path, ["L","L"] => ["L"] => we are node 1, 
-        # then go to right, path appen "R" ["L","R"]
-        # updtat "L" to U
-        # joinn path and return 
-        # time: O(n), space:O(h) n is num of node, blance h is heigh of the tree, worste O(n)
         def lca(node):
             if not node:
                 return None
@@ -27,10 +16,9 @@ class Solution:
             left = lca(node.left)
             right = lca(node.right)
 
-            if left and right: # left=3, right=6 => return 5
+            if left and right:
                 return node
-
-            if left :
+            if left:
                 return left
             return right
 
@@ -39,7 +27,7 @@ class Solution:
         def dfs(node, target, path):
             if not node:
                 return False
-            
+
             if node.val == target:
                 return True
 
@@ -54,15 +42,10 @@ class Solution:
             path.pop()
 
             return False
-
-        start_path = []
-        dest_path = []
-
-        up = dfs(ancesstor, startValue, start_path)
-        down = dfs(ancesstor, destValue, dest_path)
-
-        return "U" * (len(start_path)) + "".join(dest_path)
-
-
-
         
+        up = []
+        down = []
+        dfs(ancesstor, startValue, up)
+        dfs(ancesstor, destValue, down)
+
+        return "U"*len(up) + "".join(down)
