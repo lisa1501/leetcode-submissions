@@ -24,7 +24,7 @@ class Solution:
                 if node.right:
                     q.append(node.right)
 
-            res.append(level)
+            res.append(level[-1])
 
-        return [arr[-1] for arr in res]
+        return res
         
