@@ -28,7 +28,7 @@ class Solution:
                         return False
 
                     if num > prev_val:
-                        prev_val = max(prev_val, num)
+                        prev_val = num
                     else:
                         return False    
             else:
@@ -39,7 +39,7 @@ class Solution:
                         return False
 
                     if num < prev_val:
-                        prev_val = min(prev_val, num)         
+                        prev_val = num
                     else:
                         return False
                         
