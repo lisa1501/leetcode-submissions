@@ -16,6 +16,6 @@ class Solution:
             if node1.val != node2.val:
                 return False
 
-            return self.isSameTree(node1.left, node2.left) and self.isSameTree(node1.right, node2.right)
+            return dfs(node1.left, node2.left) and dfs(node1.right, node2.right)
             
         return dfs(p, q)
