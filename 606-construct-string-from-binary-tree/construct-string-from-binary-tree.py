@@ -6,24 +6,21 @@
 #         self.right = right
 class Solution:
     def tree2str(self, root: Optional[TreeNode]) -> str:
+        res = ""
         def dfs(node):
+            nonlocal res
             if not node:
-                return ""
+                return res
 
-            left = dfs(node.left)
-            right = dfs(node.right)
+            res += str(node.val)
 
-            if not left and not right:
-                return f"{node.val}"
+            if node.left:
+                res += "(" + self.tree2str(node.left) + ")"
 
-            if left and right:
-                return f"{node.val}({left})({right})"
+            if node.right:
+                if not node.left:
+                    res += "()"
 
-            if not left and right:
-                return f"{node.val}()({right})"
-
-            if left and not right:
-                return f"{node.val}({left})"
-
-        return dfs(root)
-        
+                res += "(" + self.tree2str(node.right) + ")"
+        dfs(root)
+        return res
