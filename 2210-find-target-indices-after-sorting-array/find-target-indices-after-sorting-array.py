@@ -8,9 +8,7 @@ class Solution:
             if num == target:
                 count_target += 1
 
-        res = [-1] * count_target
-        for i in range(len(res)):
-            res[i] = count
+        res = [count] * count_target
 
         for i in range(1,len(res)):
             res[i] = res[i-1] + 1
