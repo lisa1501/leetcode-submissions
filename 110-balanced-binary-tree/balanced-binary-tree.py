@@ -17,7 +17,7 @@ class Solution:
             left = dfs(node.left)
             right = dfs(node.right)
 
-            if abs(left - right) >= 2:
+            if abs(left - right) > 1:
                 isBalanced = False
 
             return 1 + max(left, right)
