@@ -28,5 +28,3 @@ class Solution:
             dfs(start)
             ans = max(ans, len(visited))
         return ans
-
-        
