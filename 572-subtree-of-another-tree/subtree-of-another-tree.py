@@ -5,9 +5,8 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-    def isSubtree(self, root: Optional[TreeNode], subRoot: Optional[TreeNode]) -> bool:
-
-        def isSameTrees(a,b):
+    def isSubtree(self, root: TreeNode | None, subRoot: TreeNode | None) -> bool:
+        def sameTree(a, b):
             if not a and not b:
                 return True
 
@@ -17,15 +16,16 @@ class Solution:
             if a.val != b.val:
                 return False
 
-            return isSameTrees(a.left, b.left) and isSameTrees(a.right, b.right)
+            return sameTree(a.left, b.left) and sameTree(a.right, b.right)
 
         def dfs(node):
             if not node:
                 return False
-            
-            if isSameTrees(node, subRoot):
+
+            if sameTree(node, subRoot):
                 return True
-            
+
             return dfs(node.left) or dfs(node.right)
 
         return dfs(root)
+        
