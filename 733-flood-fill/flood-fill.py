@@ -1,30 +1,30 @@
 class Solution:
-    def floodFill(self, image: List[List[int]], sr: int, sc: int, color: int) -> List[List[int]]:
+    def floodFill(self, image: list[list[int]], sr: int, sc: int, color: int) -> list[list[int]]:
         original_color = image[sr][sc]
         if original_color == color:
             return image
-
-        rows = len(image)
-        cols = len(image[0])
-        dirs = [(0,1), (0,-1), (1,0), (-1,0)]
+        n = len(image)
+        m = len(image[0])
+        dirs = [(0,1),(0,-1),(1,0),(-1,0)]
+        visited = set()
 
         def dfs(r, c):
-            if r < 0 or r >= rows or c < 0 or c >= cols or image[r][c] != original_color:
+            if r < 0 or r >= n or c <0 or c >= m or (r,c) in visited or image[r][c] != original_color:
                 return 
-
+            visited.add((r,c))
             image[r][c] = color
 
             for dr, dc in dirs:
-                nr = dr + r
-                nc = dc + c
+                nr = r + dr
+                nc = c + dc
                 dfs(nr, nc)
 
-        for r in range(rows):
-            for c in range(cols):
+
+        for r in range(n):
+            for c in range(m):
                 if r == sr and c == sc:
-                    dfs(r, c)
+                    dfs(r,c)
         return image
 
         
         
-
