@@ -5,15 +5,14 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-    def preorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
-        res = []
+    def preorderTraversal(self, root: TreeNode | None) -> list[int]:
+        result = []
         def dfs(node):
             if not node:
-                return 
-
-            res.append(node.val)
+                return []
+            result.append(node.val)
             dfs(node.left)
             dfs(node.right)
-            
         dfs(root)
-        return res
+        return result
+        
